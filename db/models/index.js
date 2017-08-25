@@ -8,4 +8,6 @@
 const User = require('./user')
 const Campus = require('./campus')
 
+Campus.hasMany(User, {as: 'Students'})
+
 module.exports = {User}

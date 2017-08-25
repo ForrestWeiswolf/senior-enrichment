@@ -25,7 +25,7 @@ export default class WinterJokes extends Component {
   render() {
     if (!this.state) { return null }
 
-    const {joke, answered} = this.state    
+    const {joke, answered} = this.state
     return (
       <div>
         <h1 onClick={answered ? this.nextJoke : this.answer}>{joke.q}</h1>
@@ -58,11 +58,11 @@ A: The dive-in!
 Q: What kind of math do Snowy Owls like?
 A: Owlgebra.
 Q: What did the ocean say to the bergy bits?
-A: Nothing. It just waved.
+A: It moaned and it groaned, and it splashe and it foamed, and it rolled on it's weary way.
 Q: What sits on the bottom of the cold Arctic Ocean and shakes?
 A: A nervous wreck.
-Q: How do you know if there's a snowman in your bed? 
-A: You wake up wet!
+Q: How do you know if there's a snowman in your bed?
+A: Inductive reasoning - there's never been one there before, after all.
 Q: How do you tell the difference between a walrus and an orange?
 A: Put your arms around it and squeeze it. If you don't get orange juice, it's a walrus.
 Q: What do chefs call "Baked Alaska" in Alaska?
@@ -70,9 +70,9 @@ A: Baked Here
 Q: Getting a job in the Arctic in the winter is great! Why?
 A: When the days get short, you only have to work a 30 minute work week.
 Q: Why do seals swim in salt water?
-A: Because pepper water makes them sneeze!
+A: Because there isn't fresh water in the ocean.
 Q: Where can you find an ocean without any water?
-A: On a map!
+A: Maybe Titan? (The map is not the territory.)
 Q: What eight letters can you find in water from the Arctic Ocean?
 A: H to O! (H20)
 Q: Which side of an Arctic Tern has the most feathers?
@@ -90,7 +90,7 @@ A: Dam!
 Q: What do you call a reindeer with no eyes?
 A: I have no eye deer.
 Q: What do you get from sitting on the ice too long?
-A: Polaroids!
+A: Cold and impatient.
 Q: What did the detective in the Arctic say to the suspect?
 A: Where were you on the night of September to March?
 Q: What noise wakes you up at the North Pole around March 18?
@@ -98,15 +98,19 @@ A: The crack of dawn!
 Q: If you live in an igloo, what's the worst thing about global warming?
 A: No privacy!
 Q: When are your eyes not eyes?
-A: When the cold Arctic wind makes them water!
+A: In the matrix, they're simulated eyes.
 Q: What did the icy Arctic road say to the truck?
-A: Want to go for a spin?
+A:
+READ BAKWARDS
+THINK I
+ENGINEERS
+HIGHWAY
 Q: What do Arctic hares use to keep their fur lookin' spiffy?
 A: Hare spray!
 Q: What do you call ten Arctic hares hopping backwards through the snow together?
-A: A receding hare line.
+A: Arthur.
 Q: Why are bad school grades like a shipwreck in the Arctic Ocean?
-A: They're both below C level!`
+A: They're potentialy distressing?`
   .split('\n')
   .reduce((all, row, i) =>
     i % 2 === 0
