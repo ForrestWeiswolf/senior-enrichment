@@ -9,5 +9,6 @@ const User = require('./user')
 const Campus = require('./campus')
 
 Campus.hasMany(User, {as: 'Students'})
+User.belongsTo(Campus)
 
-module.exports = {User}
+module.exports = {User, Campus}
