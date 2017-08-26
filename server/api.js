@@ -24,7 +24,6 @@ api.get('/users/:id', (req, res) => {
 })
 
 api.post('/users/', (req, res) => {
-  console.log(req.body)
   User.create({
     name: req.body.name,
     email: req.body.email,
@@ -54,6 +53,17 @@ api.get('/campuses/:id', (req, res) => {
   })
   .then( (campus) => {
     res.json(campus.dataValues)
+  })
+})
+
+api.post('/campuses/', (req, res) => {
+  console.log(req.body)
+  Campus.create({
+    name: req.body.name,
+    image: req.body.image,
+  })
+  .then((campus) => {
+    res.json(campus)
   })
 })
 
