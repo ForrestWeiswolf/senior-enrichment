@@ -23,22 +23,23 @@ api.get('/users/:id', (req, res) => {
   })
 })
 
-// api.post('/users/', (req, res) => {
-//   User.create({
-//     name: req.params.name,
-//     email: req.params.email,
-//   })
-//   .then((user) => { /
-//     user.setCampus(req.params.campusId)
-//     return(
-//       db.sync()
-//       .then( () => user)
-//     )
-//   })
-//   .then( (user) => {
-//     res.json(user)
-//   })
-// })
+api.post('/users/', (req, res) => {
+  console.log(req.body)
+  User.create({
+    name: req.body.name,
+    email: req.body.email,
+  })
+  .then((user) => {
+    user.setCampus(req.body.campusId)
+    return (
+      db.sync()
+      .then( () => user)
+    )
+  })
+  .then( (user) => {
+    res.json(user)
+  })
+})
 
 api.get('/campuses', (req, res) => {
   Campus.findAll()
