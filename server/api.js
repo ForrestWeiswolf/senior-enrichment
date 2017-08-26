@@ -57,7 +57,6 @@ api.get('/campuses/:id', (req, res) => {
 })
 
 api.post('/campuses/', (req, res) => {
-  console.log(req.body)
   Campus.create({
     name: req.body.name,
     image: req.body.image,
