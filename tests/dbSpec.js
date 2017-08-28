@@ -1,10 +1,12 @@
 'use strict';
 
 var Promise = require('bluebird');
-var expect = require('chai').expect;
-var Article = require('../db/models/user');
-var Article = require('../db/models/campus');
-var db = require('../db/models');
+var Chai = require('chai')
+const expect = Chai.expect;
+
+var User = require('../db/models/user');
+var Campus = require('../db/models/campus');
+var db = require('../db');
 
 
 
