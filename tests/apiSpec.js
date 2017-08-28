@@ -10,7 +10,7 @@ var db = require('../db');
 var User = require('../db/models/user');
 var Campus = require('../db/models/campus');
 
-describe('Users Route:', function () {
+xdescribe('Users Route:', function () {
 
   /**
    * First we clear the database before beginning each run
