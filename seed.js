@@ -31,9 +31,12 @@ const userData = [
   }
 ]
 
-db.sync({force: true})
+Campus.sync({force: true})
 .then( () => {
-  Promise.all(campusData.map((campus) => {
+  return User.sync({force: true})
+})
+.then( () => {
+  return Promise.all(campusData.map((campus) => {
     return Campus.create(campus)
   }))
 })
@@ -44,26 +47,6 @@ db.sync({force: true})
 })
 .catch((err) => console.error("There was an error in seed", err, err.stack))
 .finally( () => {
+  console.log("Closing")
   db.close();
 })
-
-
-// const campuses = campusData.map( (campus) => {
-//    return Campus.build(campus)
-// })
-
-// const users = userData.map( (user) => {
-//    return User.build(user)
-// })
-
-// db.sync({force: true})
-// .then( () => {
-//   Campus.save()
-// })
-// .then( () => {
-//   User.save()
-// })
-// .catch((err) => console.error("There was an error in seed", err, err.stack))
-// .finally( () => {
-//   db.close();
-// })
