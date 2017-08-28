@@ -9,7 +9,6 @@ var Campus = require('../db/models/campus');
 var db = require('../db');
 
 
-
 describe('The Campus model', function() {
   before(function() {
     return db.sync({
@@ -21,16 +20,15 @@ describe('The Campus model', function() {
 
   beforeEach(function() {
     campus = Campus.build({
-      name: 'Titan',
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Titan_in_true_color.jpg"
+      name: 'Jupiter',
+      image: "http://gunnerkrigg.com/comics/00000570.jpg"
     });
   });
 
   afterEach(function() {
     return Promise.all([
-      Campus.truncate({
-        cascade: true
-      }),
+      User.truncate({ cascade: true }),
+      Campus.truncate({ cascade: true })
     ]);
   });
 
@@ -39,15 +37,15 @@ describe('The Campus model', function() {
 
       return campus.save()
         .then(function(savedCampus) {
-          expect(savedCampus.name).to.equal('Titan');
-          expect(savedCampus.image).to.equal('https://upload.wikimedia.org/wikipedia/commons/4/45/Titan_in_true_color.jpg');
+          expect(savedCampus.name).to.equal('Jupiter');
+          expect(savedCampus.image).to.equal('http://gunnerkrigg.com/comics/00000570.jpg');
         });
 
     });
 
     it('requires name to be a non-empty string', function() {
 
-      campus.title = '';
+      campus.name = '';
 
       return campus.validate()
         .then(function() {
@@ -74,8 +72,8 @@ xdescribe('The User model', function() {
   var campus;
   beforeEach(function() {
     campus = Campus.build({
-      name: 'Titan',
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Titan_in_true_color.jpg"
+      name: 'Jupiter',
+      image: "http://gunnerkrigg.com/comics/00000570.jpg"
     });
 
     user = User.build({
@@ -106,7 +104,7 @@ xdescribe('The User model', function() {
       });
     });
 
-    it('requires name to be a non-empty string', function() {
+    it('requires name to be a non-empty string', function() { //this test is broken
       user.name = '';
 
       return user.validate()
@@ -114,6 +112,7 @@ xdescribe('The User model', function() {
           throw new Error('validation should fail when content is empty');
         },
         function(result) {
+          console.log(result)
           expect(result).to.be.an.instanceOf(Error);
           expect(result.message).to.contain('Validation error');
         });
