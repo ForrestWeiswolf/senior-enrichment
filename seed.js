@@ -31,22 +31,20 @@ const userData = [
   }
 ]
 
-Campus.sync({force: true})
-.then( () => {
-  return User.sync({force: true})
-})
-.then( () => {
-  return Promise.all(campusData.map((campus) => {
-    return Campus.create(campus)
-  }))
-})
-.then( ()=> {
-  return Promise.all(userData.map((user) => {
-    return User.create(user)
-  }))
+let cP = campusData.map(campus => Campus.create(campus));
+let uP = userData.map(u => User.create(u))
+
+let promises = cP.concat(uP)
+
+Promise.all(cP)
+.then(res => Promise.all(uP))
+.then(res2 => db.sync({}))
+// .finally( () => {
+//   console.log("Closing")
+//   db.close();
+// })
+.then(res3 => {
+  console.log("db sync'd")
+  db.close()
 })
 .catch((err) => console.error("There was an error in seed", err, err.stack))
-.finally( () => {
-  console.log("Closing")
-  db.close();
-})
