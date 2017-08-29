@@ -4,9 +4,6 @@ const db = require('../db')
 const User = db.models.user;
 const Campus = db.models.campus;
 
-// If you aren't getting to this object, but rather the index.html (something with a joke) your path is wrong.
-	// I know this because we automatically send index.html for all requests that don't make sense in our backend.
-	// Ideally you would have something to handle this, so if you have time try that out!
 api.get('/users', (req, res) => {
   User.findAll()
   .then( (users) => {
@@ -40,6 +37,16 @@ api.post('/users/', (req, res) => {
   })
 })
 
+api.delete('/users/:id', (req, res) => {
+  User.findOne({
+    where: {id: req.params.id}
+  })
+  .then( (user) => {
+    user.destroy();
+    res.status(204).end()
+  })
+})
+
 api.get('/campuses', (req, res) => {
   Campus.findAll()
   .then( (campuses) => {
@@ -63,6 +70,19 @@ api.post('/campuses/', (req, res) => {
   })
   .then((campus) => {
     res.json(campus)
+  })
+})
+
+api.delete('/campuses/:id', (req, res) => {
+  Campus.findOne({
+    where: {id: req.params.id}
+  })
+  .then( (campus) => {
+    User.destroy({
+      where: {campusId: req.params.id}
+    })
+    campus.destroy();
+    res.status(204).end()
   })
 })
 

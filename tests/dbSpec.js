@@ -9,11 +9,10 @@ var Campus = require('../db/models/campus');
 var db = require('../db');
 
 
-describe('The Campus model', function() {
+xdescribe('The Campus model', function() {
   before(function() {
-    return db.sync({
-      force: true
-    });
+    return Campus.sync({ force: true })
+    .then( () => User.sync({ force: true }))
   });
 
   var campus;
@@ -61,50 +60,43 @@ describe('The Campus model', function() {
   });
 })
 
-xdescribe('The User model', function() {
+describe('The User model', function() {
   before(function() {
-    return db.sync({
-      force: true
-    });
+    return Campus.sync({force: true})
+    .then( () => User.sync({force: true}) )
   });
 
   var user;
   var campus;
   beforeEach(function() {
-    campus = Campus.build({
+    return campus = Campus.create({
       name: 'Jupiter',
       image: "http://gunnerkrigg.com/comics/00000570.jpg"
-    });
-
-    user = User.build({
-      name: 'Katerina Donlan',
-      email: "KaterinaDonlan@gunnerkrigg.ac.uk",
-      campusId: 1
+    }).then( () => {
+      user = User.build({ //not saving because we will test validation later
+        name: 'Katerina Donlan',
+        email: "KaterinaDonlan@gunnerkrigg.ac.uk",
+        campusId: 1
+      })
     });
   });
 
   afterEach(function() {
-    return Promise.all([
-      Campus.truncate({
-        cascade: true
-      }),
-      User.truncate({
-        cascade: true
-      }),
-    ]);
+    return Campus.truncate({ cascade: true })
+    .then( () => User.truncate({ cascade: true }))
   });
 
   describe('attributes definition', function() {
-    it('includes `name` and `email` fields', function() {
-
-    return user.save()
-      .then(function(savedUser) {
-        expect(savedUser.name).to.equal('Katerina Donlan');
-        expect(savedUser.email).to.equal('KaterinaDonlan@gunnerkrigg.ac.uk');
-      });
+    it('includes `name` and `email` fields', function(done) {
+       user.save()
+        .then(function(savedUser) {
+          expect(savedUser.name).to.equal('Katerina Donlan');
+          expect(savedUser.email).to.equal('KaterinaDonlan@gunnerkrigg.ac.uk');
+        })
+        .then(done);
     });
 
-    it('requires name to be a non-empty string', function() { //this test is broken
+    it('requires name to be a non-empty string', function() {
       user.name = '';
 
       return user.validate()
@@ -131,7 +123,7 @@ xdescribe('The User model', function() {
         });
     });
 
-    it('requires email to be unique', function() {
+    xit('requires email to be unique', function() {
       user.save()
         .then(() => {
           const impostor = User.build({
