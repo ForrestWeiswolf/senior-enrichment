@@ -9,7 +9,7 @@ import Root from './components/Root'
 
 render (
   <Provider store={store}>
-  	<HashRouter>
+    <HashRouter>
       <Root/>
     </HashRouter>
   </Provider>,
