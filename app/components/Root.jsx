@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
-import Navbar from './navbar'
+import React from 'react';
+// import {Route} from 'react-router-dom'
+import Navbar from './Navbar'
+import CampusList from './CampusList'
 
-export default function Main(props){
+export default function Root(){
   return (
-    <Navbar />
+    <div id='app' className='container'>
+      <Navbar />
+      <CampusList />
+    </div>
   )
 }

@@ -9,7 +9,7 @@ var Campus = require('../db/models/campus');
 var db = require('../db');
 
 
-xdescribe('The Campus model', function() {
+describe('The Campus model', function() {
   before(function() {
     return Campus.sync({ force: true })
     .then( () => User.sync({ force: true }))

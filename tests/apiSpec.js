@@ -10,13 +10,14 @@ var db = require('../db');
 var User = require('../db/models/user');
 var Campus = require('../db/models/campus');
 
-xdescribe('Users Route:', function () {
+describe('Users Route:', function () {
 
   /**
    * First we clear the database before beginning each run
    */
   before(function () {
-    return db.sync({force: true});
+    return Campus.sync({ force: true })
+    .then( () => User.sync({ force: true }))
   });
 
   /**
