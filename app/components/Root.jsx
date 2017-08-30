@@ -5,6 +5,7 @@ import CampusList from './CampusList'
 import StudentList from './StudentList'
 import { fetchStudents, fetchCampuses } from '../reducers'
 import { connect } from 'react-redux';
+import {BrowserRouter} from 'react-router-dom'
 
 class Root extends Component{
   constructor(){
@@ -17,12 +18,14 @@ class Root extends Component{
 
   render() {
     return (
+      <BrowserRouter>
       <div id='app' className='container'>
         <Navbar />
-        <Route path="/" exact={true} component={CampusList} />
+        {/* <Route path="/" exact={true} component={CampusList} /> */}
         <Route path="/campuses" component={CampusList} />
         <Route path="/students" component={StudentList} />
       </div>
+      </BrowserRouter>
     )
   }
 }
