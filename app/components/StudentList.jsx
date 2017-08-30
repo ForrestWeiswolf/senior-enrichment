@@ -9,7 +9,7 @@ function StudentList(props){
     {props.students.map(
       (student) => <tr key={student.id}>
         <th>{student.name}</th>
-        <th>{student.campus}</th>
+        <th>{student.campusId}</th>
         <th><button className="btn btn-sm btn-danger">X</button></th>
       </tr>
     )
@@ -20,9 +20,9 @@ function StudentList(props){
 }
 
 const mapState = (state) => {
-  console.log("students mapping state:", state)
   return { students: state.students };
 }
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(StudentList);
+//there's something odd about when this re-renders after data is fetched, but...
