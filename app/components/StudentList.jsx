@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 function StudentList(props){
   return (
     <table className="table table-condensed table-hover">
-    {console.log("studentList props:", props)}
     <tbody>
     {props.students.map(
       (student) => <tr key={student.id}>

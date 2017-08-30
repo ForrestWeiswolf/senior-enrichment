@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, BrowserRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
 import Navbar from './Navbar'
 import CampusList from './CampusList'
 import StudentList from './StudentList'
 import Home from './Home'
+
 import { fetchStudents, fetchCampuses } from '../reducers'
-import { connect } from 'react-redux';
-import {BrowserRouter} from 'react-router-dom'
 
 class Root extends Component{
   constructor(){
@@ -35,7 +36,6 @@ const mapProps = null;
 
 const mapDispatch = (dispatch) => ({
   fetchData: () => {
-    console.log("about to dispatch fetch")
     dispatch(fetchStudents());
     dispatch(fetchCampuses());
   }
