@@ -6,7 +6,6 @@ import Navbar from './Navbar'
 import CampusList from './CampusList'
 import StudentList from './StudentList'
 import Home from './Home'
-
 import { fetchStudents, fetchCampuses } from '../reducers'
 
 class Root extends Component{
@@ -25,14 +24,14 @@ class Root extends Component{
         <Navbar />
         <Route path="/" exact={true} component={Home} />
         <Route path="/campuses" component={CampusList} />
-        <Route path="/students" component={StudentList} />
+        <Route path="/students" render={() =>  <StudentList students={this.props.students}/>} />
       </div>
       </BrowserRouter>
     )
   }
 }
 
-const mapProps = null;
+const mapProps = (state) => state;
 
 const mapDispatch = (dispatch) => ({
   fetchData: () => {
