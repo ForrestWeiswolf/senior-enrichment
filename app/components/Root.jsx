@@ -3,8 +3,7 @@ import { Route } from 'react-router-dom'
 import Navbar from './Navbar'
 import CampusList from './CampusList'
 import StudentList from './StudentList'
-import { fetchStudents } from '../reducers'
-console.log(fetchStudents)
+import { fetchStudents, fetchCampuses } from '../reducers'
 import { connect } from 'react-redux';
 
 class Root extends Component{
@@ -34,6 +33,7 @@ const mapDispatch = (dispatch) => ({
   fetchData: () => {
     console.log("about to dispatch fetch")
     dispatch(fetchStudents());
+    dispatch(fetchCampuses());
   }
 });
 

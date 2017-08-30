@@ -25,4 +25,5 @@ const mapState = (state) => {
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(StudentList);
+
 //there's something odd about when this re-renders after data is fetched, but...
