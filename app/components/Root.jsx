@@ -1,16 +1,40 @@
-import React from 'react';
-import {Route} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import Navbar from './Navbar'
 import CampusList from './CampusList'
 import StudentList from './StudentList'
+import { fetchStudents } from '../reducers'
+console.log(fetchStudents)
+import { connect } from 'react-redux';
 
-export default function Root(){
-  return (
-    <div id='app' className='container'>
-      <Navbar />
-      <Route path="/" exact={true} component={CampusList} />
-      <Route path="/campuses" component={CampusList} />
-      <Route path="/students" component={StudentList} />
-    </div>
-  )
+class Root extends Component{
+  constructor(){
+    super()
+  }
+
+  componentDidMount(){
+    this.props.fetchData()
+  }
+
+  render() {
+    return (
+      <div id='app' className='container'>
+        <Navbar />
+        <Route path="/" exact={true} component={CampusList} />
+        <Route path="/campuses" component={CampusList} />
+        <Route path="/students" component={StudentList} />
+      </div>
+    )
+  }
 }
+
+const mapProps = null;
+
+const mapDispatch = (dispatch) => ({
+  fetchData: () => {
+    console.log("about to dispatch fetch")
+    dispatch(fetchStudents());
+  }
+});
+
+export default connect(mapProps, mapDispatch)(Root);
