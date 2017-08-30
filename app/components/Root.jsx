@@ -6,6 +6,8 @@ import Navbar from './Navbar'
 import CampusList from './CampusList'
 import StudentList from './StudentList'
 import Home from './Home'
+import SingleCampus from './SingleCampus'
+
 import { fetchStudents, fetchCampuses } from '../reducers'
 
 class Root extends Component{
@@ -23,7 +25,8 @@ class Root extends Component{
       <div id='app' className='container'>
         <Navbar />
         <Route path="/" exact={true} component={Home} />
-        <Route path="/campuses" component={CampusList} />
+        <Route path="/campuses" exact={true} component={CampusList} />
+        <Route path="/campuses/:id" component={SingleCampus} />
         <Route path="/students" render={() =>  <StudentList students={this.props.students}/>} />
       </div>
       </BrowserRouter>
