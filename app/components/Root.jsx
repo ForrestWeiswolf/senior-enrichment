@@ -9,6 +9,7 @@ import Home from './Home'
 import SingleCampus from './SingleCampus'
 import SingleStudent from './SingleStudent'
 import CreateCampus from './CreateCampus'
+import CreateStudent from './CreateStudent'
 
 import { fetchStudents, fetchCampuses } from '../reducers/thunks'
 
@@ -24,22 +25,37 @@ class Root extends Component{
   render() {
     return (
       <BrowserRouter>
-      <Switch>
       <div id='app' className='container'>
         <Navbar />
-        <Route path="/" exact={true} component={Home} />
-        <Route path="/campuses/create" render={ () => {
-          return (<div>
-            <CreateCampus />
-            <CampusList />
-          </div>)
-        }} />
-        <Route path="/campuses/:id" component={SingleCampus} />
-        <Route path="/campuses" component={CampusList} />
-        <Route path="/students" exact={true} render={() =>  <StudentList students={this.props.students}/>} />
-        <Route path="/students/:id" component={SingleStudent} />
+
+        <Switch>
+          <Route path="/" exact={true} component={Home} />
+
+          <Route path="/campuses/create" render={ () => {
+            return (<div>
+              <CreateCampus />
+              <CampusList />
+            </div>)
+          }} />
+
+          <Route path="/campuses/:id" component={SingleCampus} />
+
+          <Route path="/campuses" component={CampusList} />
+
+          <Route
+            path="/students"
+            exact={true}
+            render={() =>  (
+              <div>
+                <CreateStudent />
+                <StudentList students={this.props.students}/>
+              </div>
+            )}
+          />
+
+          <Route path="/students/:id" component={SingleStudent} />
+        </Switch>
       </div>
-      </Switch>
       </BrowserRouter>
     )
   }
