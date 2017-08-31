@@ -8,6 +8,7 @@ const initialState = {
 
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
+const GET_NEW_CAMPUS = 'GET_NEW_CAMPUS'
 
 //thuncks:
 
@@ -27,7 +28,24 @@ export function fetchStudents() {
   }
 }
 
+export function postCampus(data) {
+  console.log('POSTcAMPUS THUNK CREATOR', data)
+  return (dispatch) => {
+    axios.post('/api/campuses', data)
+    .then( (response) => dispatch(getNewCampus(response.data)))
+    .catch( (err) => console.error('Could not post campus', err))
+  }
+}
+
 //action creators:
+
+function getNewCampus(campus) {
+  console.log('getNewCampus', campus)
+  return {
+    type: GET_NEW_CAMPUS,
+    campus: campus
+  }
+}
 
 function getStudents(students) {
   return {
@@ -49,6 +67,10 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {students: action.students})
     case GET_CAMPUSES:
       return Object.assign({}, state, {campuses: action.campuses})
+    case GET_NEW_CAMPUS:
+      const newState = Object.assign({}, state)
+      newState.campuses.push(action.campus)
+      return newState
     default: return state
   }
 };
