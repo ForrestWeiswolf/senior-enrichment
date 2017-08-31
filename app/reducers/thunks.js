@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getNewCampus, getStudents, getCampuses } from './index'
+import { getNewCampus, getStudents, getCampuses, deleteCampus } from './index'
 
 export function fetchCampuses() {
   return (dispatch) => {
@@ -24,3 +24,12 @@ export function postCampus(data) {
     .catch( (err) => console.error('Could not post campus', err))
   }
 }
+
+export function removeCampus(id) {
+  return (dispatch) => {
+    axios.delete(`/api/campuses/${id}`)
+    .then( () => dispatch(deleteCampus(id)))
+    .catch( (err) => console.error('Error when deleting campus', err))
+  }
+}
+

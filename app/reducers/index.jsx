@@ -8,6 +8,7 @@ const initialState = {
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
 const GET_NEW_CAMPUS = 'GET_NEW_CAMPUS'
+const DELETE_CAMPUS = 'DELETE_CAMPUS'
 
 //action creators:
 
@@ -33,6 +34,13 @@ export function getCampuses(campuses) {
   }
 }
 
+export function deleteCampus(campusId) {
+  return {
+    type: DELETE_CAMPUS,
+    campusId: campusId
+  }
+}
+
 const rootReducer = function(state = initialState, action) {
   switch(action.type) {
     case GET_STUDENTS:
@@ -43,6 +51,10 @@ const rootReducer = function(state = initialState, action) {
       const newState = Object.assign({}, state)
       newState.campuses.push(action.campus)
       return newState
+    case DELETE_CAMPUS:
+      return Object.assign({}, state, {campuses: action.campuses.filter((campus) => {
+        campus.id === action.campusId
+      })})
     default: return state
   }
 };
