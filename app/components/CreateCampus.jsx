@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { postCampus } from '../reducers'
+import { postCampus } from '../reducers/thunks'
 
 class CreateCampus extends Component{
   constructor(props){
@@ -16,7 +16,6 @@ class CreateCampus extends Component{
 
   nameHandleChange(event){
     this.nameInput = event.target.value
-    console.log(this.nameInput)
   }
 
   imageHandleChange(event){
@@ -25,7 +24,6 @@ class CreateCampus extends Component{
 
   handleSubmit(event){
     event.preventDefault()
-    console.log('handling submit')
     this.props.post({
       name: this.nameInput,
       image: this.imageInput
@@ -33,7 +31,6 @@ class CreateCampus extends Component{
   }
 
   render() {
-    {console.log('this: ', this)}
     return (<form onSubmit={this.handleSubmit}>
       <div className="form-group">
         <label>Campus Name</label>
@@ -63,9 +60,7 @@ const mapState = null
 const mapDispatch = (dispatch) => {
   return {
     post: (campus) => {
-      console.log('about to post', campus)
       const thunk = postCampus(campus)
-      console.log('thunk:', thunk)
       dispatch(thunk)
     }
   }

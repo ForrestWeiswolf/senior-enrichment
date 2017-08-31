@@ -10,7 +10,7 @@ import SingleCampus from './SingleCampus'
 import SingleStudent from './SingleStudent'
 import CreateCampus from './CreateCampus'
 
-import { fetchStudents, fetchCampuses } from '../reducers'
+import { fetchStudents, fetchCampuses } from '../reducers/thunks'
 
 class Root extends Component{
   constructor(){

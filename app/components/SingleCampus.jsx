@@ -18,7 +18,6 @@ function SingleCampus(props){
 const mapState = (state, ownProps) => {
   const campus = state.campuses.find( (c) => (c.id == ownProps.match.params.id) ) || null
   const students = state.students.filter( (s) => (s.campusId == ownProps.match.params.id))
-  console.log(campus, students)
   return {
     campus,
     students
