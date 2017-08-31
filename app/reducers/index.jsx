@@ -52,8 +52,8 @@ const rootReducer = function(state = initialState, action) {
       newState.campuses.push(action.campus)
       return newState
     case DELETE_CAMPUS:
-      return Object.assign({}, state, {campuses: action.campuses.filter((campus) => {
-        campus.id === action.campusId
+      return Object.assign({}, state, {campuses: state.campuses.filter((campus) => {
+        return campus.id !== action.campusId
       })})
     default: return state
   }
