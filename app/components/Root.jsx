@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, BrowserRouter} from 'react-router-dom'
+import { Route, BrowserRouter, Switch} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import Navbar from './Navbar'
@@ -24,6 +24,7 @@ class Root extends Component{
   render() {
     return (
       <BrowserRouter>
+      <Switch>
       <div id='app' className='container'>
         <Navbar />
         <Route path="/" exact={true} component={Home} />
@@ -38,6 +39,7 @@ class Root extends Component{
         <Route path="/students" exact={true} render={() =>  <StudentList students={this.props.students}/>} />
         <Route path="/students/:id" component={SingleStudent} />
       </div>
+      </Switch>
       </BrowserRouter>
     )
   }
