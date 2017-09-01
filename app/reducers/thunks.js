@@ -33,6 +33,19 @@ export function postStudent(data) {
   }
 }
 
+export function updateStudent(id, data) {
+  let res;
+  return (dispatch) => {
+    axios.post(`/api/users/${id}`, data)
+    .then( (response) => {
+      res = response
+      dispatch(deleteStudent(id))
+    })
+    .then( (response) => dispatch(getNewStudent(res)))
+    .catch( (err) => console.error('Could not post student', err))
+  }
+}
+
 export function removeCampus(id) {
   return (dispatch) => {
     axios.delete(`/api/campuses/${id}`)
