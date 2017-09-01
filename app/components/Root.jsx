@@ -10,6 +10,7 @@ import SingleCampus from './SingleCampus'
 import SingleStudent from './SingleStudent'
 import CreateCampus from './CreateCampus'
 import CreateStudent from './CreateStudent'
+import EditStudent from './EditStudent'
 
 import { fetchStudents, fetchCampuses } from '../reducers/thunks'
 
@@ -52,6 +53,8 @@ class Root extends Component{
               </div>
             )}
           />
+
+          <Route path="/students/:id/edit" component={EditStudent} />
 
           <Route path="/students/:id" component={SingleStudent} />
         </Switch>
