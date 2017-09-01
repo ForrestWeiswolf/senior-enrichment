@@ -34,9 +34,10 @@ export function postStudent(data) {
 }
 
 export function updateStudent(id, data) {
+  console.log(id, data)
   let res;
   return (dispatch) => {
-    axios.post(`/api/users/${id}`, data)
+    axios.put(`/api/users/${id}`, data)
     .then( (response) => {
       res = response
       dispatch(deleteStudent(id))
