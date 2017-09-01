@@ -21,19 +21,24 @@ api.get('/users/:id', (req, res) => {
 })
 
 api.post('/users/', (req, res) => {
-  console.log(req.body)
   User.create({
     name: req.body.name,
     email: req.body.email,
     campusId: req.body.campusId
   })
-  // .then((user) => {
-  //   user.setCampus(req.body.campusId)
-  //   return (
-  //     db.sync()
-  //     .then( () => user)
-  //   )
-  // })
+  .then( (user) => {
+    res.json(user)
+  })
+})
+
+api.put('/users/:id', (req, res) => {
+  console.log(req.body)
+  User.findOne({
+    where: {id: req.params.id}
+  })
+  .then( (user) => {
+    return user.update(req.body, {returning: true})
+  })
   .then( (user) => {
     res.json(user)
   })
